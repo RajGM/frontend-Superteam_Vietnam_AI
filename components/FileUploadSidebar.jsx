@@ -12,10 +12,10 @@ export default function FileUploader({ onFileUpload }) {
     const selectedFile = e.target.files[0];
 
     if (selectedFile) {
-      const allowedExtensions = /\.md$/i; // Matches files with a .md extension
+      const allowedExtensions = /\.(md|json)$/i;
 
       if (!allowedExtensions.test(selectedFile.name)) {
-        toast.error('Only Markdown (.md) files are allowed.');
+        toast.error('Only Markdown (.md) and JSON files are allowed.');
         setFile(null); // Clear any previously selected file
         return;
       }
@@ -80,7 +80,7 @@ export default function FileUploader({ onFileUpload }) {
       <h2 className="text-2xl font-bold mb-4">Upload Files</h2>
       <div className="form-control mb-4">
         <label className="label">
-          <span className="label-text">Select a Markdown file to upload:</span>
+          <span className="label-text">Select a Markdown or JSON file to upload:</span>
         </label>
         <input
           type="file"

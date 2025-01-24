@@ -18,7 +18,7 @@ export default function ListFileViewer() {
     const fetchFiles = async () => {
       setLoadingFiles(true);
       try {
-        const fetchedFiles = await listFilesInFirebase('uploads');
+        const fetchedFiles = await listFilesInFirebase('superteam_vietname_ai');
         setFiles(fetchedFiles);
       } catch (error) {
         console.error('Error listing files:', error);
