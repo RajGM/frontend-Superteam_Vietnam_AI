@@ -24,6 +24,12 @@ export default function RightSidebar({ activeTab, setActiveTab }) {
         >
           Update
         </button>
+        <button
+          className={`btn btn-block btn-outline ${activeTab === 'update' ? 'btn-primary' : ''}`}
+          onClick={() => setActiveTab('tweet')}
+        >
+          Tweet
+        </button>
       </nav>
     </div>
   );

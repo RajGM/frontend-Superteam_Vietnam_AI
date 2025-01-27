@@ -1,13 +1,28 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RightSidebar from '@components/RightSidebar';
 import ChatFeed from '@components/ChatFeed';
 import UploadSection from '@components/FileUploadSidebar';
 import UpdateSection from '@components/FileListViewer';
+import Tweet from '@components/Tweet';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('chat'); // Maintain active tab state here
+  useEffect(() => {
+    // Initialize Telegram Web App
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    return () => {
+      tg.close(); // Clean up on unmount
+    };
+  }, []);
+
+  const handleClose = () => {
+    window.Telegram.WebApp.close();
+  };
+
 
   return (
     <main className="min-h-screen bg-base-200" data-theme="corporate">
@@ -18,17 +33,22 @@ export default function Home() {
             {activeTab === 'chat' && (
               <div>
                 {/* Replace this with the actual ChatFeed component */}
-                <ChatFeed/>
+                <ChatFeed />
               </div>
             )}
             {activeTab === 'upload' && (
               <div>
-                <UploadSection/>
+                <UploadSection />
               </div>
             )}
             {activeTab === 'update' && (
               <div>
-                <UpdateSection/>
+                <UpdateSection />
+              </div>
+            )}
+            {activeTab === 'tweet' && (
+              <div>
+                <Tweet />
               </div>
             )}
           </div>
@@ -37,6 +57,20 @@ export default function Home() {
           <RightSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>
+
+      <button
+        style={{
+          padding: '10px 20px',
+          backgroundColor: '#0088cc',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+        onClick={handleClose}
+      >
+        Close Web App
+      </button>
     </main>
   );
 }
