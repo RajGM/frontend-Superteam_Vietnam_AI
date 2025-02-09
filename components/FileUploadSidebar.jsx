@@ -12,10 +12,10 @@ export default function FileUploader({ onFileUpload }) {
     const selectedFile = e.target.files[0];
 
     if (selectedFile) {
-      const allowedExtensions = /\.(md|json)$/i;
+      const allowedExtensions = /\.(json)$/i;
 
       if (!allowedExtensions.test(selectedFile.name)) {
-        toast.error('Only Markdown (.md) and JSON files are allowed.');
+        toast.error('JSON files are allowed.');
         setFile(null); // Clear any previously selected file
         return;
       }
